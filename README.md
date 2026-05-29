@@ -1,86 +1,92 @@
-## Overview
-
-AI Spend Audit helps startups instantly identify over-spending on AI tools and suggests cheaper, optimized alternatives with estimated savings.
 # AI Spend Audit
 
-AI Spend Audit is a web application that helps startups and engineering teams identify overspending on AI subscriptions and API tools like ChatGPT, Claude, Cursor, GitHub Copilot, Gemini, and more.
+AI Spend Audit is a SaaS-style web application that helps startups and teams identify overspending on AI tools like ChatGPT, Claude, Cursor, GitHub Copilot, Gemini, and more.
 
-The tool provides instant recommendations, estimated monthly savings, and annual savings opportunities based on team size, selected plans, and usage patterns.
+It analyzes team size, tool selection, and plan type to estimate monthly and annual savings, and provides optimization recommendations.
 
-## Features
+---
 
-* AI tool spend audit
-* Cost optimization recommendations
-* Monthly and annual savings calculation
-* Support for multiple AI tools
-* Responsive UI built with Next.js and Tailwind CSS
-* Local storage persistence
-* Deployed production app using Vercel
+## 🚀 Live Demo
+https://ai-spend-audit1-five.vercel.app/
 
-## Supported Tools
+---
 
-* ChatGPT
-* Claude
-* Cursor
-* GitHub Copilot
-* Gemini
-* OpenAI API
-* Anthropic API
-* Windsurf
+## ✨ Features
 
-## Tech Stack
+- AI tool spend analysis
+- Cost optimization recommendations
+- Monthly & annual savings calculation
+- Shareable audit links (`/audit/[id]`)
+- Dashboard for saved audits
+- Email capture (optional)
+- PDF report download
+- Local storage persistence
+- CI/CD with GitHub Actions
+- Deployed on Vercel
 
-* Next.js
-* React
-* TypeScript
-* Tailwind CSS
-* Vercel
+---
 
-## Screenshots
+## 🧠 Supported Tools
 
+- ChatGPT
+- Claude
+- Cursor
+- GitHub Copilot
+- Gemini
+- OpenAI API
+- Anthropic API
+- Windsurf
 
-![Home Page](https://via.placeholder.com/800x400?text=AI+Spend+Audit+Home)
-![Audit Result](https://via.placeholder.com/800x400?text=Audit+Result+Page)
+---
 
+## 🛠 Tech Stack
 
-## Local Development
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- LocalStorage (data persistence)
+- jsPDF (report generation)
+- GitHub Actions (CI)
+- Vercel (deployment)
 
-Install dependencies:
+---
+
+## 📁 Project Structure
+
+src/
+app/
+  page.tsx
+  dashboard/
+    page.tsx
+  audit/
+    [id]/
+      page.tsx
+
+components/
+  AuditForm.tsx
+
+lib/
+  audit/
+
+---
+
+## ⚙️ How It Works
+
+1. User selects AI tools and plan
+2. System calculates estimated overspend
+3. Result is generated instantly
+4. Data is saved in localStorage
+5. Unique shareable URL is created
+6. User can:
+   - Share link
+   - View dashboard
+   - Download PDF report
+
+---
+
+## 🧪 Local Setup
 
 ```bash
 npm install
-```
-
-Run development server:
-
-```bash
 npm run dev
-```
-
-Open:
-
-```txt
-http://localhost:3000
-```
-
-## Deployment
-
-The project is deployed on Vercel.
-
-## Decisions
-
-1. Chose Next.js for fast deployment and App Router support.
-2. Used TypeScript for better type safety and maintainability.
-3. Used Tailwind CSS for rapid UI development.
-4. Used simple rule-based audit logic for predictable recommendations.
-5. Prioritized fast MVP delivery before advanced AI integrations.
-
-## Live URL
-
-## Live URL
-
-https://ai-spend-audit1-five.vercel.app/
-
-## GitHub Repository
-
-https://github.com/Betharasisruthi/ai-spend-audit1
