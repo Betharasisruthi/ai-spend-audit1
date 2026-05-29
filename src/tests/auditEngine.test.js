@@ -1,4 +1,5 @@
-const { generateAudit } = require("../lib/audit/auditEngine");
+const path = require("path");
+const { generateAudit } = require(path.resolve(__dirname, "../lib/audit/auditEngine"));
 
 function test(name, fn) {
   try {
