@@ -82,8 +82,32 @@ export default function AuditForm() {
               ChatGPT
             </option>
 
+            <option value="Claude">
+              Claude
+            </option>
+
             <option value="Cursor">
               Cursor
+            </option>
+
+            <option value="GitHub Copilot">
+              GitHub Copilot
+            </option>
+
+            <option value="Gemini">
+              Gemini
+            </option>
+
+            <option value="OpenAI API">
+              OpenAI API
+            </option>
+
+            <option value="Anthropic API">
+              Anthropic API
+            </option>
+
+            <option value="Windsurf">
+              Windsurf
             </option>
           </select>
         </div>
@@ -122,6 +146,10 @@ export default function AuditForm() {
 
             <option value="Pro">
               Pro
+            </option>
+
+            <option value="Ultra">
+              Ultra
             </option>
           </select>
         </div>
