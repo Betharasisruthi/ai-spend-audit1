@@ -2,21 +2,18 @@
 
 import { useState } from "react";
 import { generateAudit } from "@/lib/audit/auditEngine";
-import jsPDF from "jspdf";
 
 type AuditResult = {
   recommendation: string;
   savings: number;
   annualSavings: number;
   reason: string;
-  email?: string | null;
 };
 
 export default function AuditForm() {
   const [tool, setTool] = useState<string>("ChatGPT");
   const [plan, setPlan] = useState<string>("Team");
   const [seats, setSeats] = useState<number>(2);
-  const [email, setEmail] = useState<string>("");
 
   const [result, setResult] = useState<AuditResult | null>(null);
   const [shareId, setShareId] = useState<string | null>(null);
@@ -28,48 +25,23 @@ export default function AuditForm() {
 
     setResult(audit);
 
+    // generate ID
     const id = Date.now().toString();
 
+    // save to localStorage
     const existing = JSON.parse(
       localStorage.getItem("audits") || "{}"
     );
 
-    existing[id] = {
-      ...audit,
-      email: email || null,
-    };
+    existing[id] = audit;
 
     localStorage.setItem("audits", JSON.stringify(existing));
 
+    // set shareable id
     setShareId(id);
 
+    // update URL without reload
     window.history.pushState({}, "", `/audit/${id}`);
-  }
-
-  function copyLink() {
-    navigator.clipboard.writeText(window.location.href);
-    alert("Share link copied!");
-  }
-
-  function downloadPDF() {
-    if (!result) return;
-
-    const doc = new jsPDF();
-
-    doc.setFontSize(16);
-    doc.text("AI Spend Audit Report", 20, 20);
-
-    doc.setFontSize(12);
-    doc.text(`Recommendation: ${result.recommendation}`, 20, 40);
-    doc.text(`Monthly Savings: $${result.savings}`, 20, 55);
-    doc.text(`Annual Savings: $${result.annualSavings}`, 20, 70);
-    doc.text(`Reason: ${result.reason}`, 20, 85);
-
-    if (email) {
-      doc.text(`Email: ${email}`, 20, 100);
-    }
-
-    doc.save("audit-report.pdf");
   }
 
   return (
@@ -132,21 +104,6 @@ export default function AuditForm() {
           />
         </div>
 
-        {/* EMAIL */}
-        <div>
-          <label className="block mb-2 text-sm text-gray-400">
-            Email (optional)
-          </label>
-
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@company.com"
-            className="w-full p-4 rounded-xl bg-black border border-gray-700 text-white"
-          />
-        </div>
-
         {/* BUTTON */}
         <button
           type="submit"
@@ -202,26 +159,16 @@ export default function AuditForm() {
               </p>
             </div>
 
-            {/* ACTIONS */}
-            <div className="pt-4 flex flex-col gap-2">
-
-              <button
-                type="button"
-                onClick={copyLink}
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm"
+            {/* ✅ CLICKABLE SHARE LINK */}
+            {shareId && (
+              <a
+                href={`/audit/${shareId}`}
+                target="_blank"
+                className="text-sm text-blue-400 underline pt-4 inline-block"
               >
-                Copy Share Link
-              </button>
-
-              <button
-                type="button"
-                onClick={downloadPDF}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm"
-              >
-                Download PDF Report
-              </button>
-
-            </div>
+                Open Shareable Audit Link
+              </a>
+            )}
 
           </div>
         </div>
