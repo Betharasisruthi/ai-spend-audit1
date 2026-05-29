@@ -1,3 +1,6 @@
+## Overview
+
+AI Spend Audit helps startups instantly identify over-spending on AI tools and suggests cheaper, optimized alternatives with estimated savings.
 # AI Spend Audit
 
 AI Spend Audit is a web application that helps startups and engineering teams identify overspending on AI subscriptions and API tools like ChatGPT, Claude, Cursor, GitHub Copilot, Gemini, and more.
@@ -35,7 +38,10 @@ The tool provides instant recommendations, estimated monthly savings, and annual
 
 ## Screenshots
 
-(Add screenshots here later)
+
+![Home Page](https://via.placeholder.com/800x400?text=AI+Spend+Audit+Home)
+![Audit Result](https://via.placeholder.com/800x400?text=Audit+Result+Page)
+
 
 ## Local Development
 
@@ -71,8 +77,10 @@ The project is deployed on Vercel.
 
 ## Live URL
 
-Add deployed Vercel URL here.
+## Live URL
+
+https://ai-spend-audit1-five.vercel.app/
 
 ## GitHub Repository
 
-Add GitHub repository URL here.
+https://github.com/Betharasisruthi/ai-spend-audit1
