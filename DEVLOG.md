@@ -25,3 +25,30 @@
 - Improve audit recommendation logic
 - Add pricing data
 - Add tests
+
+
+## Day 2 — 2026-05-30
+
+**Hours worked:** 4
+
+**What I did:**
+- Expanded audit engine with more AI tools
+- Added Claude, Gemini, GitHub Copilot, Windsurf, OpenAI API, and Anthropic API support
+- Improved recommendation logic
+- Improved README documentation
+- Tested deployment on Vercel
+
+**What I learned:**
+- Learned how to structure reusable audit logic
+- Improved understanding of React state handling
+- Learned more about deployment workflows
+
+**Blockers / what I'm stuck on:**
+- Need better pricing accuracy
+- Need dynamic plan options based on selected tools
+
+**Plan for tomorrow:**
+- Add pricing source documentation
+- Build email capture feature
+- Add automated tests
+- Improve landing page polish
