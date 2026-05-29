@@ -1,0 +1,232 @@
+"use client";
+
+import { useState } from "react";
+import { generateAudit } from "@/lib/audit/auditEngine";
+
+type AuditResult = {
+  recommendation: string;
+  savings: number;
+  annualSavings: number;
+  reason: string;
+};
+
+export default function AuditForm() {
+  const [tool, setTool] = useState<string>("ChatGPT");
+  const [plan, setPlan] = useState<string>("Team");
+  const [seats, setSeats] = useState<number>(2);
+
+  const [result, setResult] =
+    useState<AuditResult | null>(null);
+
+  function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
+    e.preventDefault();
+
+    localStorage.setItem(
+      "audit-form",
+      JSON.stringify({
+        tool,
+        plan,
+        seats,
+      })
+    );
+
+    const audit = generateAudit(
+      tool,
+      plan,
+      seats
+    );
+
+    setResult(audit);
+  }
+
+  return (
+    <div
+      className="
+        mt-10
+        max-w-2xl
+        bg-gray-900
+        border
+        border-gray-800
+        rounded-2xl
+        p-8
+        shadow-2xl
+      "
+    >
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6"
+      >
+        <div>
+          <label className="block mb-2 text-sm text-gray-400">
+            Tool
+          </label>
+
+          <select
+            value={tool}
+            onChange={(
+              e: React.ChangeEvent<HTMLSelectElement>
+            ) => setTool(e.target.value)}
+            className="
+              w-full
+              p-4
+              rounded-xl
+              bg-black
+              border
+              border-gray-700
+              text-white
+            "
+          >
+            <option value="ChatGPT">
+              ChatGPT
+            </option>
+
+            <option value="Cursor">
+              Cursor
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block mb-2 text-sm text-gray-400">
+            Plan
+          </label>
+
+          <select
+            value={plan}
+            onChange={(
+              e: React.ChangeEvent<HTMLSelectElement>
+            ) => setPlan(e.target.value)}
+            className="
+              w-full
+              p-4
+              rounded-xl
+              bg-black
+              border
+              border-gray-700
+              text-white
+            "
+          >
+            <option value="Team">
+              Team
+            </option>
+
+            <option value="Business">
+              Business
+            </option>
+
+            <option value="Plus">
+              Plus
+            </option>
+
+            <option value="Pro">
+              Pro
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block mb-2 text-sm text-gray-400">
+            Number of Seats
+          </label>
+
+          <input
+            type="number"
+            value={seats}
+            onChange={(
+              e: React.ChangeEvent<HTMLInputElement>
+            ) =>
+              setSeats(Number(e.target.value))
+            }
+            className="
+              w-full
+              p-4
+              rounded-xl
+              bg-black
+              border
+              border-gray-700
+              text-white
+            "
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="
+            w-full
+            bg-white
+            text-black
+            px-6
+            py-4
+            rounded-xl
+            font-semibold
+            hover:bg-gray-200
+            transition
+          "
+        >
+          Audit My Spend
+        </button>
+      </form>
+
+      {result && (
+        <div
+          className="
+            mt-10
+            border
+            border-green-500/20
+            bg-green-500/10
+            p-8
+            rounded-2xl
+          "
+        >
+          <h2 className="text-3xl font-bold">
+            Audit Result
+          </h2>
+
+          <div className="mt-6 space-y-4">
+            <div>
+              <p className="text-gray-400 text-sm">
+                Recommendation
+              </p>
+
+              <p className="text-xl font-semibold">
+                {result.recommendation}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-gray-400 text-sm">
+                Monthly Savings
+              </p>
+
+              <p className="text-4xl font-bold text-green-400">
+                ${result.savings}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-gray-400 text-sm">
+                Annual Savings
+              </p>
+
+              <p className="text-2xl font-semibold">
+                ${result.annualSavings}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-gray-400 text-sm">
+                Why?
+              </p>
+
+              <p className="text-gray-200">
+                {result.reason}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
